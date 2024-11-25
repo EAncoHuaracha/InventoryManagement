@@ -32,40 +32,59 @@
         </th>
       </tr>
     </thead>
-
+    @if (status == 'loading') {
     <tbody class="text-secondary">
-      <tr *ngFor="let item of filteredData">
-        <td class="px-6 py-4">{{ item.codigo }}</td>
-        <td class="px-6 py-4">{{ item.nombre }}</td>
-        <td class="px-6 py-4">{{ item.descripcion }}</td>
-        @if (item.cantidad <= 0) { <td class="px-6 py-4 text-red-600"> Agotado </td>
-          }
-          @if (item.cantidad > 0 && item.cantidad <= 5) { <td class="px-6 py-4 text-yellow-600"> {{ item.cantidad }}
-            </td>
-            }
-            @if (item.cantidad > 5) {
-            <td class="px-6 py-4 text-green-600"> {{ item.cantidad }} </td>
-            }
-            <td class="px-6 py-4">{{ item.precioUnitario }}</td>
-            <td class="px-6 py-4">{{ item.categoria }}</td>
-            <td class="px-6 py-4">
-              <button class="text-primary hover:underline mr-2" (click)="openViewProduct(item)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
-                  <g fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3" />
-                    <path
-                      d="M20.188 10.934c.388.472.582.707.582 1.066s-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18s-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066s.194-.594.582-1.066C5.232 9.21 8.364 6 12 6s6.768 3.21 8.188 4.934Z" />
-                  </g>
-                </svg>
-              </button>
-              @if (showEditModal) {
-              <app-add-product [showModal]="showEditModal" (closeModalEvent)="openViewProduct(item)" [title]="title"
-                [product]="element" [isEditing]="isEditing"></app-add-product>
-              }
-            </td>
+      <tr>
+        <td colspan = "8" class="px-6 py-4 text-center">
+          <div class="flex items-center justify-center">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-textPrimary flex" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+              </svg>
+            Cargando...
+          </div>
+        </td>
       </tr>
     </tbody>
-    @if (filteredData == null) {
+    }
+    @if ( status == 'success' ) {
+      <tbody class="text-secondary">
+        <tr *ngFor="let item of filteredData">
+          <td class="px-6 py-4">{{ item.codigo }}</td>
+          <td class="px-6 py-4">{{ item.nombre }}</td>
+          <td class="px-6 py-4">{{ item.descripcion }}</td>
+          @if (item.cantidad <= 0) { <td class="px-6 py-4 text-red-600"> Agotado </td>
+            }
+            @if (item.cantidad > 0 && item.cantidad <= 5) { <td class="px-6 py-4 text-yellow-600"> {{ item.cantidad }}
+              </td>
+              }
+              @if (item.cantidad > 5) {
+              <td class="px-6 py-4 text-green-600"> {{ item.cantidad }} </td>
+              }
+              <td class="px-6 py-4">{{ item.precioUnitario }}</td>
+              <td class="px-6 py-4">{{ item.categoria }}</td>
+              <td class="px-6 py-4">
+                <button class="text-primary hover:underline mr-2" (click)="openViewProduct(item)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3" />
+                      <path
+                        d="M20.188 10.934c.388.472.582.707.582 1.066s-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18s-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066s.194-.594.582-1.066C5.232 9.21 8.364 6 12 6s6.768 3.21 8.188 4.934Z" />
+                    </g>
+                  </svg>
+                </button>
+                @if (showEditModal) {
+                <app-add-product [showModal]="showEditModal" (closeModalEvent)="openViewProduct(item)" [title]="title"
+                  [product]="element" [isEditing]="isEditing"></app-add-product>
+                }
+              </td>
+        </tr>
+      </tbody>
+    }
+    @if (filteredData == null && status == 'success') {
     <tr>
       <td colspan="8" class="px-6 py-4 text-center">No se encontraron resultados</td>
     </tr>

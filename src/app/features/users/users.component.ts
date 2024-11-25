@@ -32,6 +32,7 @@ export class UsersComponent {
   headers: string[] = ['Usuario', 'Correo'];
   data: User[] = [];
   element: User | null = null;
+  status: string = 'init';
   constructor(
     private readonly usersService: UsersService,
     private readonly feedbackService: FeedbackService
@@ -42,11 +43,14 @@ export class UsersComponent {
   }
 
   loadData() {
+    this.status = 'loading';
     this.usersService.getAllUsers().subscribe({
       next: (response) => {
+        this.status = 'success';
         this.data = response.data;
       },
       error: (error) => {
+        this.status = 'error';
         this.feedbackService.showError('Error al cargar usuarios');
       }
     });

@@ -33,6 +33,8 @@ export class InventoryComponent {
   headers: string[] = ['Código', 'Nombre', 'Descripción', 'Cantidad', 'Precio Unitario', 'Categoría', 'Acciones'];
   data: Product[] = [];
   element: Product | null = null;
+
+  status: string = 'init';
   constructor(
     private readonly router: Router,
     private readonly inventoryService: InventoryService,
@@ -44,11 +46,14 @@ export class InventoryComponent {
   }
 
   loadData() {
+    this.status = 'loading';
     this.inventoryService.getProducts().subscribe({
       next: (response) => {
+        this.status = 'success';
         this.data = response.data;
       },
       error: (error) => {
+        this.status = 'error';
         this.feedbackService.showError('Error al cargar productos');
         console.error('Error al cargar productos:', error);
       }

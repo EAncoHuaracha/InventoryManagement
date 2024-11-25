@@ -20,10 +20,10 @@
 
           <!-- username -->
           <div class="mb-6">
-            <label for="username" class="block text-sm font-medium mb-1">Username *</label>
+            <label for="username" class="block text-sm font-medium mb-1">Usuario *</label>
             <input type="text" id="username" formControlName="username" required
               class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
-              placeholder="Ingresa el username" />
+              placeholder="Ingresa el usuario" />
             @if (addUserForm.controls['username'].invalid && addUserForm.controls['username'].touched){
             <div class="text-error text-sm">Este campo es requerido</div>
             }
@@ -31,10 +31,10 @@
 
           <!-- email -->
           <div class="mb-6">
-            <label for="email" class="block text-sm font-medium mb-1">Email *</label>
+            <label for="email" class="block text-sm font-medium mb-1">Correo *</label>
             <input type="email" id="email" formControlName="email" required
               class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
-              placeholder="Ingresa el email" />
+              placeholder="Ingresa el correo" />
             @if (addUserForm.controls['email'].invalid && addUserForm.controls['email'].touched && !addUserForm.controls['email'].errors?.['email']) {
               <div class="text-error text-sm">Este campo es requerido</div>
             }
@@ -45,7 +45,7 @@
 
           <!-- password -->
           <div class="mb-6">
-            <label for="password" class="block text-sm font-medium mb-1">Password *</label>
+            <label for="password" class="block text-sm font-medium mb-1">Contraseña *</label>
 
             <div class="relative">
               <!-- Input password -->
@@ -55,7 +55,7 @@
                 formControlName="password"
                 required
                 class="w-full py-2 px-3 border rounded-md focus:ring-primary focus:border-primary"
-                placeholder="Ingresa el password"
+                placeholder="Ingresa la contraseña"
               />
 
               <!-- Toggle password -->
